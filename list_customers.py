@@ -18,6 +18,13 @@ class Customer:
         return f'Customer({self.name!r}, {self.email!r}, {self.vehicle_type!r}, {self.vehicle_name!r}, {self.vehicle_length!r})'
 
 
+def getName(obj):
+    return obj.name
+
+
+def getVehicleType(obj):
+    return obj.vehicle_type
+
 
 def parse_line(line: str) -> List[str]:
     """
@@ -40,7 +47,7 @@ def parse_line(line: str) -> List[str]:
 
 
 
-def parse_file(filepath: str) -> Iterable[Customer]:
+def parse_file(filepath: str, sorted: str = None) -> Iterable[Customer]:
     """
     Parse text at given filepath
 
@@ -67,6 +74,13 @@ def parse_file(filepath: str) -> Iterable[Customer]:
                 # (ex: first two values are always first/last name)
                 c = Customer("{} {}".format(row[0], row[1]), row[2], row[3], row[4], row[5])
                 customers.append(c)
+
+    # Check for sort options
+    if sorted is 'name':
+        customers.sort(key=getName)
+
+    elif sorted is 'vehicle_type':
+        customers.sort(key=getVehicleType)
 
 
     return customers
