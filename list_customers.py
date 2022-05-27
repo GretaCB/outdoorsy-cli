@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
-from typing import List, Iterable
-
+import argparse
 import inquirer
 import os
+import sys
+
+from typing import List, Iterable
+from inquirer import Path
+
 
 
 class Customer:
@@ -64,7 +68,7 @@ def parse_file(filepath: str, sorted: str = None) -> Iterable[Customer]:
         return 'Filepath must be a string'
 
     if not os.path.exists(filepath):
-        return 'File does not exist'
+        return 'File {} does not exist'.format(filepath)
 
     
     customers = []
@@ -96,25 +100,53 @@ def parse_file(filepath: str, sorted: str = None) -> Iterable[Customer]:
 
 if __name__ == "__main__":
     """
-    CLI Module to list Outdoor.sy customers
+    CLI Module to import and list Outdoor.sy customers
     * Display the information Outdoor.sy wants to see about their customers
-    * Sort the data by Vehicle type or by Full name
-    """
-
-    """
-    Arg ideas:
-    *  file_path (will also include a file dialog  using tkinter)
-    *  to_file: log results to a file (using the logger init above)
-
-    Implementation:
-    * Parses the file (via comma or pipe) and saves the data to a list of Customer objects
-        customers = [ {Customer},  {Customer}, {Customer}, ... ]
-              
-    * ?
+    * Optionally sort the data by Vehicle type or by Full name
 
     """
 
-    customers = parse_file('tests/commas.txt')
+    filepath = ''
+    sort = None
 
-    print(customers)
+    # If no args passed, assume human-triggered
+    if len(sys.argv) == 1:
+        questions = [
+            inquirer.Path("filepath", message="Which file would you like to import and list?", exists=True, normalize_to_absolute_path=True, path_type=inquirer.Path.FILE),
+            inquirer.List("sort", message="Would you like to sort the data in {filepath}?", choices=['No thanks', 'name', 'vehicle_type'])
+        ]
+
+        answers = inquirer.prompt(questions)
+
+        if answers["sort"] is "No thanks":
+            sort = None
+        else:
+            sort = answers["sort"]
+
+        filepath = answers["filepath"]
+
+
+    # This else block will cover --help and automated usage
+    else:
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            "file",
+            type=argparse.FileType('r'), # This includes builtin filepath validation
+            help="filepath to Customer data you would like to list")
+        parser.add_argument(
+            '--sort',
+            default=None,
+            help="sort customers by name or vehicle_type (defaults to None)")
+
+
+        args = parser.parse_args()
+        args.file.close() # Close TextIOWrapper
+
+        filepath = args.file.name
+        sort = args.sort
+
+
+    customers = parse_file(filepath, sort)
+
+    print('Import successful! Printing customer output...\n\n{}'.format(customers))
 

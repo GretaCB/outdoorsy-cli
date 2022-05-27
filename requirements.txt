@@ -1,2 +1,4 @@
-inquirer==2.9.2
+# Not using latest inquirer version due to backspace bug
+# see https://github.com/magmax/python-inquirer/issues/119
+inquirer==2.8.0
 pytest==6.2.4

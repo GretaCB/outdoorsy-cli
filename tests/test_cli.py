@@ -64,7 +64,7 @@ def test_parse_file_pipe_and_comma(pipe_and_comma_filename):
 
 
 def test_parse_file_pipe():
-    assert parse_file('') == 'File does not exist'
+    assert parse_file('') == 'File  does not exist'
     assert parse_file(None) == 'Filepath must be a string'
 
 
