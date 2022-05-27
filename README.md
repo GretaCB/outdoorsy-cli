@@ -25,7 +25,7 @@ Import successful! Printing customer output...
 [Customer(...), Customer(...)]
 ```
 
-You can also use this CLI via prompts by runnng it wthout args:
+You can also use this CLI via prompts by running it without args:
 ```bash
 outdoorsy-cli % python3 list_customers.py                                      
 [?] Which file would you like to import and list?: tests/pipes.txt
