@@ -17,9 +17,11 @@ from list_customers import Customer, parse_file
 def comma_filename():
     return "tests/commas.txt"
 
+
 @pytest.fixture
 def pipe_filename():
     return "tests/pipes.txt"
+
 
 def test_parse_file_comma(comma_filename):
     expected = [

@@ -18,12 +18,18 @@ class Customer:
         return f'Customer({self.name!r}, {self.email!r}, {self.vehicle_type!r}, {self.vehicle_name!r}, {self.vehicle_length!r})'
 
 
-def getName(obj):
-    return obj.name
+def getName(customer):
+    """
+    Iterator function to sort Customers by name
+    """
+    return customer.name
 
 
-def getVehicleType(obj):
-    return obj.vehicle_type
+def getVehicleType(customer):
+    """
+    Iterator function to sort Customers by Vehicle type
+    """
+    return customer.vehicle_type
 
 
 def parse_line(line: str) -> List[str]:
@@ -49,7 +55,7 @@ def parse_line(line: str) -> List[str]:
 
 def parse_file(filepath: str, sorted: str = None) -> Iterable[Customer]:
     """
-    Parse text at given filepath
+    Parse text at given filepath and sort if needed
 
     """
     
