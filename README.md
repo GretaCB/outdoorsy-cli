@@ -1,4 +1,4 @@
-# outdoorsy-cli
+# outdoorsy_cli
 
 CLI module for importing Outdoor.sy customer data from a file (comma-separated or pipe-separated) and optionally sorting by either name or vehicle type.
 
@@ -29,7 +29,7 @@ You can also use this CLI via prompts by running it without args:
 ```bash
 outdoorsy-cli % python3 list_customers.py                                      
 [?] Which file would you like to import and list?: tests/pipes.txt
-[?] Would you like to sort the data in tests/pipes.txt?: name
+[?] How would you like to sort the data in tests/pipes.txt?: name
    No thanks
  > name
    vehicle_type
