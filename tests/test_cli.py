@@ -23,6 +23,11 @@ def pipe_filename():
     return "tests/pipes.txt"
 
 
+@pytest.fixture
+def pipe_and_comma_filename():
+    return "tests/pipes_and_commas.txt"
+
+
 def test_parse_file_comma(comma_filename):
     expected = [
         Customer('Greta Thunberg', 'greta@future.com', 'sailboat', 'Fridays For Future', '32’'),
@@ -43,6 +48,19 @@ def test_parse_file_pipe(pipe_filename):
     ]
 
     assert str(parse_file(pipe_filename)) == str(expected)
+
+
+def test_parse_file_pipe_and_comma(pipe_and_comma_filename):
+    expected = [
+        Customer('Greta Thunberg', 'greta@future.com', 'sailboat', 'Fridays For Future', '32’'),
+        Customer('Xiuhtezcatl Martinez', 'martinez@earthguardian.org', 'campervan', 'Earth Guardian', '28 feet'), 
+        Customer('Isatou Ceesay', 'isatou@recycle.com', 'campervan', 'Plastic To Purses', '20’'),
+        Customer('Naomi Uemura', 'n.uemura@gmail.com', 'bicycle', 'Glacier Glider', '5 feet'),
+        Customer('Mandip Singh Soin', 'mandip@ecotourism.net', 'motorboat', 'Frozen Trekker', '32’'), 
+        Customer('Jimmy Buffet', 'jb@sailor.com', 'sailboat', 'Margaritaville', '40 ft')
+    ]
+
+    assert str(parse_file(pipe_and_comma_filename)) == str(expected)
 
 
 def test_parse_file_pipe():
