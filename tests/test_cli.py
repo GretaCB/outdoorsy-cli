@@ -1,16 +1,9 @@
+import outdoorsy_cli
 import pytest
 import sys
 import os
 
-# Generic way to get the parent directory name
-# in case the dirname changes in the future
-current = os.path.dirname(os.path.realpath(__file__))
-parent = os.path.dirname(current)
-# add parent dir to the path so the module is findable
-sys.path.append(parent)
-
-
-from list_customers import Customer, parse_file
+from outdoorsy_cli.list_customers import Customer, parse_file
 
 
 @pytest.fixture
