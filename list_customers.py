@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
+from typing import List, Iterable
+
 import inquirer
-import csv
+import os
 
 
 class Customer:
@@ -17,16 +19,58 @@ class Customer:
 
 
 
-def read_customers_from_file(filename):
-    customers = []
-    with open(filename, "r") as file:
-        rows = csv.reader(file)
-        next(rows)
-        for row in rows:
-            c = Customer("{} {}".format(row[0], row[1]), row[2], row[3], row[4], row[5])
-            customers.append(c)
+def parse_line(line: str) -> List[str]:
+    """
+    Check separation character and split line into a list
+
+    Note: this is perhaps too lenient depending on the requirements. For example
+      with this logic, it is possible to have a file with both comma-separated
+      and pipe-separated data in the same file. And maybe that's ok.
+
+    """
+
+    if "|" in line:
+        pipe_separated_data = [x.strip() for x in line.split(r'|')]
+        return pipe_separated_data
+    elif "," in line:   
+        comma_separated_data = [x.strip() for x in line.split(r',')]
+        return comma_separated_data
+    else:
+        return None
+
+
+
+def parse_file(filepath: str) -> Iterable[Customer]:
+    """
+    Parse text at given filepath
+
+    """
     
+    # Validation
+    if type(filepath) is not str:
+        return 'Filepath must be a string'
+
+    if not os.path.exists(filepath):
+        return 'File does not exist'
+
+    
+    customers = []
+    
+    # open the file and read through it line by line
+    with open(filepath, 'r') as file_object:
+
+        for line in file_object:
+            row = parse_line(line)
+
+            if row:
+                # Assumes consistent order of data in files 
+                # (ex: first two values are always first/last name)
+                c = Customer("{} {}".format(row[0], row[1]), row[2], row[3], row[4], row[5])
+                customers.append(c)
+
+
     return customers
+
 
 
 
@@ -50,8 +94,8 @@ if __name__ == "__main__":
 
     """
 
-
-    customers = read_customers('tests/commas.txt')
+    customers = parse_file('tests/commas.txt')
+    #customers = read_customers('tests/commas.txt')
 
     print(customers)
 

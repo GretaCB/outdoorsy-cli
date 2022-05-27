@@ -25,9 +25,9 @@ python3 -m pytest tests/test_cli.py
 ```
 
 ### Troubleshooting
-If after running the tests you see `ModuleNotFoundError: No module named 'inquirer'`, then run the following and retry:
+If after running the tests you see `ModuleNotFoundError: No module named 'inquirer'`, then run the following and retry the tests:
 ```
-python3 -m pip install -r requirements.tx
+python3 -m pip install -r requirements.txt
 ```
 This has to do with the python3 version you have and how it was installed.
 
