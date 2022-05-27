@@ -95,7 +95,6 @@ if __name__ == "__main__":
     """
 
     customers = parse_file('tests/commas.txt')
-    #customers = read_customers('tests/commas.txt')
 
     print(customers)
 
