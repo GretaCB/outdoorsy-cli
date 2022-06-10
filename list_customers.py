@@ -25,7 +25,7 @@ def getName(customer):
     """
     Iterator function to sort Customers by name
     """
-    return customer.name
+    return customer.name.lower()
 
 
 def getVehicleType(customer):
