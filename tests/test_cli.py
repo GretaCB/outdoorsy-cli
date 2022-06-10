@@ -56,12 +56,12 @@ def test_parse_file_pipe_and_comma(pipe_and_comma_filename):
     assert str(parse_file(pipe_and_comma_filename)) == str(expected)
 
 
-def test_parse_file_pipe():
+def test_parse_file_error():
     assert parse_file('') == 'File  does not exist'
     assert parse_file(None) == 'Filepath must be a string'
 
 
-def test_sorted_name_parse(pipe_filename):
+def test_sorted_name_parse_pipe(pipe_filename):
     expected = [
         Customer('Ansel Adams', 'a@adams.com', 'motorboat', 'Rushing Water', '24’'),
         Customer('Isatou Ceesay', 'isatou@recycle.com', 'campervan', 'Plastic To Purses', '20’'),
@@ -72,18 +72,18 @@ def test_sorted_name_parse(pipe_filename):
     assert str(parse_file(pipe_filename, 'name')) == str(expected)
 
 
-def test_sorted_vehicle_type_parse(pipe_filename):
+def test_sorted_vehicle_type_parse_pipe(pipe_filename):
     expected = [
-        Customer('Steve Irwin', 'steve@crocodiles.com', 'RV', 'G’Day For Adventure', '32 ft'),
         Customer('Naomi Uemura', 'n.uemura@gmail.com', 'bicycle', 'Glacier Glider', '5 feet'),
         Customer('Isatou Ceesay', 'isatou@recycle.com', 'campervan', 'Plastic To Purses', '20’'),
         Customer('Ansel Adams', 'a@adams.com', 'motorboat', 'Rushing Water', '24’'),
+        Customer('Steve Irwin', 'steve@crocodiles.com', 'RV', 'G’Day For Adventure', '32 ft'),
     ]
 
     assert str(parse_file(pipe_filename, 'vehicle_type')) == str(expected)
 
 
-def test_sorted_name_parse(comma_filename):
+def test_sorted_name_parse_comma(comma_filename):
     expected = [
         Customer('Greta Thunberg', 'greta@future.com', 'sailboat', 'Fridays For Future', '32’'),
         Customer('Jimmy Buffet', 'jb@sailor.com', 'sailboat', 'Margaritaville', '40 ft'),
@@ -94,7 +94,7 @@ def test_sorted_name_parse(comma_filename):
     assert str(parse_file(comma_filename, 'name')) == str(expected)
 
 
-def test_sorted_vehicle_type_parse(comma_filename):
+def test_sorted_vehicle_type_parse_comma(comma_filename):
     expected = [
         Customer('Xiuhtezcatl Martinez', 'martinez@earthguardian.org', 'campervan', 'Earth Guardian', '28 feet'), 
         Customer('Mandip Singh Soin', 'mandip@ecotourism.net', 'motorboat', 'Frozen Trekker', '32’'), 

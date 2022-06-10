@@ -32,7 +32,7 @@ def getVehicleType(customer):
     """
     Iterator function to sort Customers by Vehicle type
     """
-    return customer.vehicle_type
+    return customer.vehicle_type.lower()
 
 
 def parse_line(line: str) -> List[str]:
